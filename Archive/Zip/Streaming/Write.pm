@@ -2,7 +2,7 @@ package Archive::Zip::Streaming::Write;
 use strict;
 use warnings;
 
-require Zip::Build;
+require Archive::Zip::Build;
 
 =head1 NAME
 
@@ -10,7 +10,7 @@ Archive::Zip::Streaming::Write
 
 =head1 DESCRIPTION
 
-A thin wrapper around Zip::Build to stream actual zip files rather than
+A thin wrapper around Archive::Zip::Build to stream actual zip files rather than
 just zip data.
 
 Streams data OUT only.
@@ -46,7 +46,7 @@ Streams data OUT only.
 
 Prepares the object, which will use $filehandle to write.
 
-Options will be passed to Zip::Build, possibly with some exceptions.
+Options will be passed to Archive::Zip::Build, possibly with some exceptions.
 
 =cut
 
@@ -55,7 +55,7 @@ sub new {
   $options||={};
   my $self = {
     fh=>$filehandle,
-    mz=>new Zip::Build($filehandle, $options),
+    mz=>new Archive::Zip::Build($filehandle, $options),
   };
   return bless($self, $class);
 }
