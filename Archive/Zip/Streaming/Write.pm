@@ -146,16 +146,18 @@ sub add_file {
   }
   my $method = 'deflate';
 
-  $size=length($content) unless defined $size;
+  if(not(defined $size) and not(ref $content)) {
+    $size=length($content);
+  }
   # Skip deflation for several types.
   # .swf compresses ok
   if($filename=~/\.(?: zip | gz | tgz | png | gif | jpg | jpeg | jpe | wmv | wma | mp3 | aac | mp4 | mp2 | ogg | bz2 | fla | flv )$/x) {
     $method = 'store';
-    if($size > (2**31)-1) {
+    if(defined($size) and $size > (2**31)-1) {
       # huge files might need this to stream continuously
       $method = 'deflate';
     }
-  } elsif($size < 80) {
+  } elsif(defined($size) and $size < 80) {
     $method = 'store';
   }
   $self->{mz}->print_item(
