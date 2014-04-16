@@ -202,7 +202,9 @@ sub read_data {
             $content = $self->_read($header->{size});
         } elsif($header->{compression_method} == 8) {
             # DEFLATE
-            my ($d, $status) = Compress::Zlib::inflateInit();
+            my ($d, $status) = Compress::Zlib::inflateInit(
+                -WindowBits => -(MAX_WBITS),
+            );
             if($status) {
                 die "Inflate error: $status";
             }
