@@ -43,15 +43,14 @@ Streams data OUT only.
 =head1 SYNOPSIS
 
   unlink("test.zip");
-  my @contents = qx(find *);
+  chomp(my @contents = qx(find *));
   open(my $fh, ">", "test.zip") or die $!;
   require Archive::Zip::Streaming::Write;
   my $zs = new Archive::Zip::Streaming::Write($fh);
 
   foreach my $filename (@contents) {
-    chomp;
     my @s = stat($filename);
-    my ($atime, $mtime, $ctime, $mode, $uid, $gid) = @s[8,9,10,2,4,5]
+    my ($atime, $mtime, $ctime, $mode, $uid, $gid) = @s[8,9,10,2,4,5];
     if(-f $filename) {
       if(open(F, "<", $filename)) {
         local $/=undef;
