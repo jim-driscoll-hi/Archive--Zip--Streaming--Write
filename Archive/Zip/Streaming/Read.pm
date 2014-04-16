@@ -391,15 +391,15 @@ sub read_header {
         # UNIX file timestamps.
         my $unix_timestamp_detail = $extra_fields{0x5455};
         my $offset = 0;
-        ($offset, my $time_map_n) = _unpack_walk($offset, "C");
+        ($offset, my $time_map_n) = _unpack_walk($offset, "C", $unix_timestamp_detail);
         if($time_map_n & 0x80) {
-            ($offset, $mtime) = _unpack_walk($offset, "V");
+            ($offset, $mtime) = _unpack_walk($offset, "V", $unix_timestamp_detail);
         }
         if($time_map_n & 0x40) {
-            ($offset, $atime) = _unpack_walk($offset, "V");
+            ($offset, $atime) = _unpack_walk($offset, "V", $unix_timestamp_detail);
         }
         if($time_map_n & 0x20) {
-            ($offset, $ctime) = _unpack_walk($offset, "V");
+            ($offset, $ctime) = _unpack_walk($offset, "V", $unix_timestamp_detail);
         }
     }
     
