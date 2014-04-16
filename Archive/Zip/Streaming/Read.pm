@@ -367,7 +367,7 @@ sub read_header {
         ($offset, my $version) = _unpack_walk($offset, "C", $uid_gid_detail);
         if($version == 1) {
             my %length_to_unpack = (
-                4 => "N",
+                4 => "V",
             );
             ($offset, my $uid_length) = _unpack_walk($offset, "C", $uid_gid_detail);
             if($length_to_unpack{$uid_length}) {
