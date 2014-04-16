@@ -392,13 +392,14 @@ sub read_header {
         my $unix_timestamp_detail = $extra_fields{0x5455};
         my $offset = 0;
         ($offset, my $time_map_n) = _unpack_walk($offset, "C", $unix_timestamp_detail);
-        if($time_map_n & 0x80) {
+        if($time_map_n & 0x01) {
             ($offset, $mtime) = _unpack_walk($offset, "V", $unix_timestamp_detail);
         }
-        if($time_map_n & 0x40) {
+        if($time_map_n & 0x02) {
             ($offset, $atime) = _unpack_walk($offset, "V", $unix_timestamp_detail);
+
         }
-        if($time_map_n & 0x20) {
+        if($time_map_n & 0x04) {
             ($offset, $ctime) = _unpack_walk($offset, "V", $unix_timestamp_detail);
         }
     }
