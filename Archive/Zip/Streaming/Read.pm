@@ -363,12 +363,12 @@ sub read_header {
     if($extra_fields{0x7875}) {
         # Latest UNIX ownership
         my $uid_gid_detail = $extra_fields{0x7875};
-        my ($version) = unpack("C", $uid_gid_detail);
+        my $offset = 0;
+        ($offset, my $version) = _unpack_walk($offset, "C", $uid_gid_detail);
         if($version == 1) {
             my %length_to_unpack = (
                 4 => "N",
             );
-            my $offset = 0;
             ($offset, my $uid_length) = _unpack_walk($offset, "C", $uid_gid_detail);
             if($length_to_unpack{$uid_length}) {
                 ($offset, $uid) = _unpack_walk($offset, $length_to_unpack{$uid_length}, $uid_gid_detail);
