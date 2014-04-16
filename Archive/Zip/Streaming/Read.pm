@@ -27,7 +27,6 @@ use strict;
 use warnings;
 use bytes;
 use Compress::Zlib;
-use Time::Local;
 
 my $SIZE_IN_DATA_DESCRIPTOR = 0b00000000_00001000;
 
@@ -57,7 +56,8 @@ Support for unzipping data, stream-style. Should be largely compatible with Arch
 # Returns the UNIX timestamp corresponding to the given DOS date and time numbers.
 sub _dos_d_t_to_ts {
     my ($dos_date, $dos_time) = @_;
-    return timelocal(
+    require Time::Local;
+    return Time::Local::timelocal(
         ($dos_time & 0x1f) * 2,
         ($dos_time >> 5) & 0x3f,
         ($dos_time >> 11),
