@@ -136,10 +136,13 @@ sub new {
 =cut
 
 # _read($length)
+# _read($length, $length_is_implicit)
 #
 # Quick wrapper to die on short reads and return the read data (scalar).
+#
+# If $length_is_implicit is true, it will not die on a short read; you can use this when you don't know the length of the data.
 sub _read {
-    my ($self, $length) = @_;
+    my ($self, $length, $length_is_implicit) = @_;
     if($length) {
         my $out = "";
         if(length($self->{_overflow})) {
@@ -154,8 +157,14 @@ sub _read {
         while( (my $l = ($length > 0xff_ff_ff_ff) ? 0xff_ff_ff_ff : $length ) ) {
             my $in_length = read($self->{_fh}, my $in, $l);
             die $! unless $in_length;
-            die "Short read: $in_length < $l" if($in_length < $l);
             $out .= $in;
+            if($in_length < $l) {
+                if($length_is_implicit) {
+                    return $out;
+                } else {
+                    die "Short read: $in_length < $l" if($in_length < $l);
+                }
+            }
             $length -= $l;
         }
         return $out;
@@ -198,8 +207,8 @@ sub read_data {
                 die "Inflate error: $status";
             }
             my $in;
-            while( ( $in = $self->_read(4096) ) ) { # Example size
-                $status = $d->inflate(\$in, $content);
+            while( ( $in = $self->_read(4096, 1) ) ) { # Example size
+                ($content, $status) = $d->inflate(\$in);
                 if($status == Z_OK) {
                     # Do nothing. Just loop.
                 } elsif($status == Z_STREAM_END) {
