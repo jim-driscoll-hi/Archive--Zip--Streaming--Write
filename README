@@ -11,3 +11,11 @@ A module to support streaming data from a zip file (to code). This
 can be useful when streaming zip data from an external source, eg.
 file uploads. For more information, please see the POD documentation
 in the module.
+
+
+BUILDING A TARBALL
+
+To make a tar of this module do:
+
+git archive --format tar -o Archive-Zip-Streaming-0.1.0.tar \
+  --prefix Archive-Zip-Streaming-0.1.0/ HEAD
