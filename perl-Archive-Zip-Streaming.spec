@@ -5,7 +5,7 @@ License: BSD
 Summary: Common libraries with unrestricted internal distribution
 Group: Development/Libraries
 Packager: Jim Driscoll <jim.driscoll@heartinternet.co.uk>
-Source: perl-Archive-Zip-Streaming-%{version}.tar
+Source: Archive-Zip-Streaming-%{version}.tar
 BuildArch: noarch
 BuildRoot: %{_builddir}/%{name}-%{version}-%{release}
 
