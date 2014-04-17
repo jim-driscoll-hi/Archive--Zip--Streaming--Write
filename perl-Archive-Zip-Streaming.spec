@@ -13,7 +13,7 @@ BuildRoot: %{_builddir}/%{name}-%{version}-%{release}
 Perl libraries to support streaming to and from zip files.
 
 %prep
-%setup
+%setup -n Archive-Zip-Streaming-%{version}
 
 %build
 
