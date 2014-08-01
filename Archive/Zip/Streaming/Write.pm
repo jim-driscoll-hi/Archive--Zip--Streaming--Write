@@ -29,7 +29,7 @@ use warnings;
 
 require Archive::Zip::Build;
 
-use version; our $VERSION = version->declare("v0.1.0");
+use version; our $VERSION = version->declare("v0.1.1");
 
 =head1 NAME
 

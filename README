@@ -17,5 +17,5 @@ BUILDING A TARBALL
 
 To make a tar of this module do:
 
-git archive --format tar -o Archive-Zip-Streaming-0.1.0.tar \
-  --prefix Archive-Zip-Streaming-0.1.0/ HEAD
+git archive --format tar -o Archive-Zip-Streaming-0.1.1.tar \
+  --prefix Archive-Zip-Streaming-0.1.1/ HEAD

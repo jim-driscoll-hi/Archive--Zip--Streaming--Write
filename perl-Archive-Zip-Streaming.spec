@@ -1,5 +1,5 @@
 Name: perl-Archive-Zip-Streaming
-Version: 0.1.0
+Version: 0.1.1
 Release: 1
 License: BSD
 Summary: Common libraries with unrestricted internal distribution
@@ -26,6 +26,8 @@ install Archive/Zip/Streaming/*.pm $RPM_BUILD_ROOT/%{perl_vendorlib}/Archive/Zip
 %{perl_vendorlib}/Archive/Zip/Streaming
 
 %changelog
+* Thu Apr 17 2014 Jim Driscoll <jim.driscoll@heg.com> 0.1.1-1
+- Read: Fix extraction of DEFLATEd content over 4096 bytes
 * Thu Apr 17 2014 Jim Driscoll <jim.driscoll@heartinternet.co.uk> 0.1.0-1
 - Initial RPM
 

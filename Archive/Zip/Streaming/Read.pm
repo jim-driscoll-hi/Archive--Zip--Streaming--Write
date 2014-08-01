@@ -28,7 +28,7 @@ use warnings;
 use bytes;
 use Compress::Zlib;
 
-use version; our $VERSION = version->declare("v0.1.0");
+use version; our $VERSION = version->declare("v0.1.1");
 
 my $SIZE_IN_DATA_DESCRIPTOR = 0b00000000_00001000;
 
