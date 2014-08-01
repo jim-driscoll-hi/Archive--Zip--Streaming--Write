@@ -212,10 +212,12 @@ sub read_data {
             }
             my $in;
             while( ( $in = $self->_read(4096, 1) ) ) { # Example size
-                ($content, $status) = $d->inflate(\$in);
+                (my $temp_content, $status) = $d->inflate(\$in);
                 if($status == Z_OK) {
                     # Do nothing. Just loop.
+                  $content.=$temp_content;
                 } elsif($status == Z_STREAM_END) {
+                  $content.=$temp_content;
                     last;
                 } else {
                     die "Inflate error: $status ".$d->msg;
